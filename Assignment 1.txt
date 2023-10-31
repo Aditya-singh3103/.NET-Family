@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assignment_Day_1
+{
+    internal class Calculator
+    {
+        public int Add(int a, int b) 
+        {
+            return a + b;
+        }
+        public int Product(int a, int b)
+        {
+            return a * b;
+        }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assignment_Day_1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int a, b;
+            Console.WriteLine("Enter the Two Number");
+            a = Convert.ToInt32(Console.ReadLine());
+            b = Convert.ToInt32(Console.ReadLine());
+            Calculator c1 = new Calculator();
+          int res1=  c1.Add(a, b);
+          int res2 =  c1.Product(a, b);
+            Console.WriteLine("The Addition is " + res1);
+            Console.WriteLine("The Product is" +res2);
+        }
+    }
+}

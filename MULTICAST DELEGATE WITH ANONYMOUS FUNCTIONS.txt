@@ -1,0 +1,37 @@
+namespace Lambda_Expressions
+{
+    delegate void Table(int a);
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Table T1, T2, T3, T4;
+             T1 = delegate (int a)
+            { 
+            for(int i = 1; i <= 10; i++)
+                {
+Console.Write ("    "+(a*i));
+
+                }
+            Console.WriteLine ();
+                Console.WriteLine();
+
+            };
+            T2 = delegate (int a)
+            {
+                Console.WriteLine("Square of  numberis " + a * a);
+            };
+
+            T3 = delegate (int a) { 
+            
+            Console.WriteLine("The Cube of The Number Is"+(a*a*a));
+            
+            
+            };
+         //   T1(5);
+         //   T2(6);
+            T4 = T1 + T2 +T3;
+            T4(4);
+        }
+    }
+}

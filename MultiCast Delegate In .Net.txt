@@ -1,0 +1,42 @@
+namespace Lambda_Expression
+{
+    public delegate void Calculation(int a, int b);
+    internal class Program
+    {
+        public static void Add(int a, int b)
+        {
+            Console.WriteLine("Addiding of two number  " + (a + b));
+        }
+
+        public static void Subtraction(int a, int b)
+        {
+            if (a > b) Console.WriteLine("Subtraction is " + (a - b));
+
+            else
+            {
+                throw new Exception("First number is small as compare to other");
+            }
+        }
+        public static void Multiply(int a, int b)
+        {
+            Console.WriteLine("The Multiplication of Two number is" + (a * b));
+        }
+        public static void Division(int a, int b)
+        {
+            if (a > b) Console.WriteLine("The Division of Two number is "  + (a / b));
+            else if (a < b) Console.WriteLine( "The output IS "+b);
+            
+        }
+       
+       public static void Main(string[] args)
+        {
+            Calculation c1 = new Calculation(Subtraction);
+            c1 += Add;
+            c1 += Multiply;
+            c1 -= Add;
+            c1 -= Subtraction;
+            c1 += Division;
+            c1.Invoke(22, 3);
+        }
+    }
+}

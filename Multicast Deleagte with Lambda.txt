@@ -1,0 +1,36 @@
+using System.Data.SqlTypes;
+
+namespace Lambda_Expressions
+{
+    public delegate int Mydelegate(int a);
+    internal class Program
+    {
+       
+        static void Main(string[] args)
+        {
+
+            Mydelegate square = (a) =>
+            {
+                a = a * a;
+                return a;
+                
+            };
+            Mydelegate Cube = (a) => 
+            {
+                a = a * a * a; return a;
+            
+            };
+
+             Mydelegate D1 = new Mydelegate(square);
+         int a    =     D1.Invoke(3);
+            Console.WriteLine("Square of The Number is =  "+a);
+            
+            Mydelegate D2 = new Mydelegate(Cube); 
+            int b = D2.Invoke(3);
+            Console.WriteLine("Cube of The NUmber is =  "+ b);
+         
+          
+
+        }
+    }
+}

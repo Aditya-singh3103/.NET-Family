@@ -1,0 +1,59 @@
+using System.Threading.Tasks.Dataflow;
+
+namespace Events
+{
+    internal class Program
+    {
+        public delegate void Transform(int x);
+        static void Main(string[] args)
+        {
+            static void Square(int x)
+            {
+
+                Console.WriteLine(x * x);
+            }
+
+            static void cube(int x)
+            {
+                Console.WriteLine(x * x * x);
+            }
+
+            Transform T1 = new Transform(Square);
+            T1 += cube;
+            T1.Invoke(5);
+
+            Notification obj = new Notification();
+            obj.transformEvent += T1;
+            obj.transformEvent += T1;
+            obj.NotifyOnCell(8);
+
+        }
+        class Notification
+        {
+            public event Transform transformEvent;
+
+            public void NotifyOnCell(int x)
+            {
+
+                if (transformEvent != null)
+                {
+                    transformEvent(x);
+                }
+            }
+        }
+
+        class user1 
+        {
+        public static void X(int x)
+            {
+
+                Console.WriteLine("Event By User 1st");
+            }
+            public static void Y(int y) 
+            {
+                Console.WriteLine("Event By User 2nd");
+            }
+        }
+
+    }
+}

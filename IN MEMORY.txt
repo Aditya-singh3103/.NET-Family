@@ -1,0 +1,169 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace IN_Memoey_Crud
+{
+    internal interface IEmployeeRepo
+    {
+       Employee GetEmployee(int id);
+        IEnumerable<Employee> GetAllEmployee();
+        Employee Add(Employee emp);
+        Employee Update(Employee emp);
+        Employee delete(int id);
+    }
+}using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace IN_Memoey_Crud
+{
+    class Employee
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public double Salary { get; set; }
+        public string Gender { get; set; }
+        public string Address { get; set; }
+
+
+
+
+        public override String ToString()
+        {
+            return String.Format("Id=" + id + "Name" + name + "Salary " + Salary +"Gender"+Gender+"Address"+Address);
+        }
+
+
+
+    }
+}using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace IN_Memoey_Crud
+{
+
+    class My : IEmployeeRepo
+    {
+        public static List<Employee> emplist;
+
+       
+      
+
+      public My()      {
+          emplist = new List<Employee>(){
+                          new Employee() {id=1,name ="Aditya Singh",Salary=90000 ,Gender="Male",Address="Bilaspur Chhattisghar",},
+                          new Employee() {id=2,name ="Aekansh Singh",Salary=80000 ,Gender="Male",Address="Durg Chhattisghar",},
+                          new Employee() {id=3,name ="Harshal Sarode",Salary=80000 ,Gender="Male",Address="Durg Chhattisghar",}
+                          };
+
+
+
+
+        }
+
+        public Employee Add(Employee emp)
+        {
+            emp.id = emplist.Max(x => x.id) + 1;
+            emplist.Add(emp);
+
+
+
+            return emp;
+        }
+
+        public Employee delete(int id)
+        {
+
+            Employee emp = emplist.FirstOrDefault(x => x.id == id);
+            if (emp != null)
+            {
+                emplist.Remove(emp);
+            }
+            return emp;
+        }
+
+        public IEnumerable<Employee> GetAllEmployee()
+        {
+            return emplist;
+        }
+
+        public Employee GetEmployee(int id)
+        {
+            Employee emp = emplist.FirstOrDefault(x => x.id == id);
+            return emp;
+        }
+
+        public Employee Update(Employee emp)
+        {
+            Employee emp1 = emplist.FirstOrDefault(e => e.id == emp.id);
+
+            if (emp1 != null)
+            {
+                emp1.id = emp.id;
+                emp1.name = emp.name;
+                emp1.Salary = emp.Salary;
+                emp1.Gender = emp.Gender;
+                emp1.Address = emp.Address;
+
+            }
+
+            return emp1;
+
+
+        }
+
+
+                  }
+    }
+using System.Net.Sockets;
+using System.Security.Cryptography.X509Certificates;
+
+namespace IN_Memoey_Crud
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            My m1 = new My();
+
+           void Aditya(){
+                
+                foreach (var item in m1.GetAllEmployee())
+                {
+
+                    Console.WriteLine(item);
+                }
+            }
+
+
+
+            Employee emp = m1.Add(new Employee() { id = 4, name = "Ash", Salary = 22000, Gender = "Male", Address = "Dubai" });
+            Console.WriteLine("Add Function");
+            Aditya();
+
+          
+            Console.WriteLine("Update");
+
+            Employee emp1 = m1.Update(new Employee() { id = 4, name = "Bramaha  ", Salary = 70000, Gender = "Female  ", Address = "Dubai  " });
+
+            Aditya();
+            
+            
+
+
+            Console.WriteLine("Delete Function");
+            m1.delete(1);
+            Aditya();
+        }
+        
+}
+}
